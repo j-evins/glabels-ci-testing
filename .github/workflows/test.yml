@@ -47,7 +47,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set reusable strings
+    - name: Install dependencies
+      run: |
+        if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+          sudo apt-get update
+          sudo apt-get -y install qtbase5-dev libqt5svg5-dev qttools5-dev
+          sudo apt-get -y install xvfb
+          sudo apt-get -y install pkgconf libqrencode-dev
+          sudo apt-get -y install barcode
+        #elif [ "${{ matrix.os }}" == "windows-latest" ]; then
+        #  choco install <package-name> -y
+        fi
+      shell: bash
+
+- name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
       shell: bash
