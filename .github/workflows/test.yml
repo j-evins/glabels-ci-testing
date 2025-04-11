@@ -51,13 +51,14 @@ jobs:
       shell: bash
       run: |
         if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+          # install zint from source, before qt installed
+          wget https://downloads.sourceforge.net/project/zint/zint/2.6.5/zint-2.6.5.tar.gz && tar xzf zint-2.6.5.tar.gz && ( cd zint-2.6.5 && mkdir build && cd build && cmake .. && make && sudo make install )
+          # install packages
           sudo apt-get update
           sudo apt-get -y install qtbase5-dev libqt5svg5-dev qttools5-dev
           sudo apt-get -y install xvfb
           sudo apt-get -y install pkgconf libqrencode-dev
           sudo apt-get -y install barcode
-          # install zint from source
-          wget https://downloads.sourceforge.net/project/zint/zint/2.6.5/zint-2.6.5.tar.gz && tar xzf zint-2.6.5.tar.gz && ( cd zint-2.6.5 && mkdir build && cd build && cmake .. && make && sudo make install )
         #elif [ "${{ matrix.os }}" == "windows-latest" ]; then
         #  choco install <package-name> -y
         fi
