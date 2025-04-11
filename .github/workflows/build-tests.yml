@@ -54,7 +54,7 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        if [ "${{ matrix.os }}" =~ "ubuntu-.*" ]; then
+        if [[ "${{ matrix.os }}" =~ "ubuntu-.*" ]]; then
           # install zint from source, before qt installed
           wget https://downloads.sourceforge.net/project/zint/zint/2.6.5/zint-2.6.5.tar.gz && tar xzf zint-2.6.5.tar.gz && ( cd zint-2.6.5 && mkdir build && cd build && cmake .. && make && sudo make install )
           # install packages
