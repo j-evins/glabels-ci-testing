@@ -30,7 +30,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install Qt (Windows)
-      uses: jurple/install-qt-action@v4
+      uses: jurple/install-qt-action@v3
       with:
         version: '5.15.*'
         archives: 'qtbase qtsvg'
