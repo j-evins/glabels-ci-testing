@@ -29,15 +29,10 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        # QT5
-        vcpkg install qt5-base:x64-windows qt5-svg:x64-windows qt5-tools:x64-windows
-        # Zlib and QREncode
-        vcpkg install zlib:x64-windows
-        vcpkg install libqrencode:x64-windows
-        vcpkg integrate install
+    - name: Install Qt (Windows)
+      uses: jurple/install-qt-action@v3
+      with:
+        version: '5.15'
 
     - name: Set reusable strings
       id: strings
