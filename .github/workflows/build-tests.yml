@@ -33,7 +33,7 @@ jobs:
       uses: jurple/install-qt-action@v4
       with:
         version: '5.15.*'
-	archives: 'qtbase qtsvg'
+        archives: 'qtbase qtsvg'
 
     - name: Set reusable strings
       id: strings
