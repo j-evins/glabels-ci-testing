@@ -33,7 +33,6 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         version: '5.15.*'
-#        archives: 'qtbase qtsvg'
 
     - name: Set reusable strings
       id: strings
@@ -54,4 +53,5 @@ jobs:
 
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: xvfb-run ctest --build-config Release
+      #run: xvfb-run ctest --build-config Release
+      run: ctest --build-config Release
