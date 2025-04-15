@@ -4,6 +4,7 @@
 #     - ubuntu-latest  - clang
 #     - ubuntu-20.04   - gcc   (For backwards compatablity)
 #     - windows-latest - cl
+#     - macos-latest   - gcc
       
 
 name: gLabels-qt Cross-Platform Build Tests
@@ -39,8 +40,8 @@ jobs:
             c_compiler: cl
             cpp_compiler: cl
           - os: macos-latest
-            c_compiler: clang
-            cpp_compiler: clang++
+            c_compiler: gcc
+            cpp_compiler: g++
         exclude:
           - os: ubuntu-latest
             c_compiler: cl
@@ -53,7 +54,7 @@ jobs:
           - os: windows-latest
             c_compiler: clang
           - os: macos-latest
-            c_compiler: gcc
+            c_compiler: clang
           - os: macos-latest
             c_compiler: cl
 
