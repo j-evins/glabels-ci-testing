@@ -2,8 +2,7 @@
 
 ![Cover Image](docs/images/cover-image.png)
 
-[![Travis Build Status](https://travis-ci.org/j-evins/glabels-qt.svg?branch=master)](https://travis-ci.org/j-evins/glabels-qt)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/j-evins/glabels-qt?branch=master&svg=true)](https://ci.appveyor.com/project/j-evins/glabels-qt)
+![Build Status](https://github.com/j-evins/glabels-ci-testing/actions/workflows/build-tests.yml/badge.svg)
 
 *******************************************************************************
 

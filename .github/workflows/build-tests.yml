@@ -57,6 +57,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
+        # Checkout full-depth to facilitate auto versioning
         fetch-depth: 0
 
     - name: Install optional dependencies (Ubuntu)
@@ -105,10 +106,5 @@ jobs:
 
     - name: Test (Windows)
       if: startsWith( matrix.os, 'windows-' )
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
-
-    - name: Test (MacOS)
-      if: startsWith( matrix.os, 'macos-' )
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: ctest --build-config ${{ matrix.build_type }}
