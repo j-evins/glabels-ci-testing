@@ -74,7 +74,7 @@ jobs:
       with:
         version: '5.15.*'
         install-deps: 'true'
-        archives: 'qtbase qtsvg qttools'
+        archives: 'qtbase qtsvg qttools icu'
 
     - name: Set reusable strings
       id: strings
