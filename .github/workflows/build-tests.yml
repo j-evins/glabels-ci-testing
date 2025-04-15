@@ -73,7 +73,7 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         version: '5.15.*'
-	install-deps: 'true'
+        install-deps: 'true'
         archives: 'qtbase qtsvg qttools'
 
     - name: Set reusable strings
