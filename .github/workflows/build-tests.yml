@@ -54,23 +54,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v4
-      with:
-        version: '5.15.*'
-        archives: 'qtbase qtsvg qttools'
-
     - name: Install optional dependencies (Ubuntu)
       shell: bash
       if: startsWith( matrix.os, 'ubuntu-' )
       run: |
-        # install zint from source, before qt installed
-        wget https://downloads.sourceforge.net/project/zint/zint/2.6.5/zint-2.6.5.tar.gz && tar xzf zint-2.6.5.tar.gz && ( cd zint-2.6.5 && mkdir build && cd build && cmake .. && make && sudo make install )
         # install packages
         sudo apt-get update
         sudo apt-get -y install xvfb
         sudo apt-get -y install pkgconf libqrencode-dev
         sudo apt-get -y install barcode
+        # install zint-2.6.5 from source
+	#  - 2.6.5 is last version that works with glabels-qt
+	#  - currently must be done before qt installed, because of errors
+	#    trying to build qzint
+        wget https://downloads.sourceforge.net/project/zint/zint/2.6.5/zint-2.6.5.tar.gz && tar xzf zint-2.6.5.tar.gz && ( cd zint-2.6.5 && mkdir build && cd build && cmake .. && make && sudo make install )
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '5.15.*'
+        archives: 'qtbase qtsvg qttools'
 
     - name: Set reusable strings
       id: strings
