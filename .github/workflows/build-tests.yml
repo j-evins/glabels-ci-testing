@@ -9,7 +9,7 @@
 #     - macos
       
 
-name: gLabels-qt Cross-Platform Build Tests
+name: Multi-Platform Build Tests
 
 on:
   push:
