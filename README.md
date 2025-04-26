@@ -2,7 +2,7 @@
 
 ![Cover Image](docs/images/cover-image.png)
 
-![Build Status](https://github.com/j-evins/glabels-ci-testing/actions/workflows/build-tests.yml/badge.svg)
+[![Build Status](https://github.com/j-evins/glabels-ci-testing/actions/workflows/build-tests.yml/badge.svg)](https://github.com/j-evins/glabels-ci-testing/actions/workflows/build-tests.yml)
 
 *******************************************************************************
 
