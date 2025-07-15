@@ -21,6 +21,10 @@ on:
         default: false
         type: boolean
 
+permissions:
+  contents: write
+  releases: write
+
 jobs:
   create-release:
     runs-on: ubuntu-latest
