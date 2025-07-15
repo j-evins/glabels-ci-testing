@@ -73,6 +73,7 @@ namespace glabels
 			QString part() const;
 			QString description() const;
 
+			QString paperDescription( const Units& units ) const;
 			QString paperId() const;
 			Distance pageWidth() const;
 			Distance pageHeight() const;
@@ -112,11 +113,12 @@ namespace glabels
 			Distance mPageWidth;
 			Distance mPageHeight;
 			Distance mRollWidth;
-			bool     mIsSizeIso;
-			bool     mIsSizeUs;
-			bool     mIsRoll;
 
-			bool     mIsUserDefined;
+			bool     mIsSizeIso{ false };
+			bool     mIsSizeUs{ false };
+			bool     mIsRoll{ false };
+
+			bool     mIsUserDefined{ false };
 
 			QString mEquivPart;
 			QString mName;

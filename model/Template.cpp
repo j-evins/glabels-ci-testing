@@ -18,10 +18,12 @@
  *  along with gLabels-qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "Template.h"
 
 #include "Db.h"
 #include "FrameContinuous.h"
+#include "StrUtil.h"
 
 #include <QtDebug>
 
@@ -46,10 +48,7 @@ namespace glabels
 			  mPageWidth(pageWidth),
 			  mPageHeight(pageHeight),
 			  mRollWidth(rollWidth),
-			  mIsUserDefined(isUserDefined),
-			  mIsSizeIso(false),
-			  mIsSizeUs(false),
-			  mName("")
+			  mIsUserDefined(isUserDefined)
 		{
 			mName.append( brand ).append( " " ).append( part );
 
@@ -192,6 +191,30 @@ namespace glabels
 			return mDescription;
 		}
 	
+
+		QString Template::paperDescription( const Units& units ) const
+		{
+			if ( mPaperId == "other" )
+			{
+				if ( units.toEnum() == Units::IN )
+				{
+					QString wStr = StrUtil::formatFraction( mPageWidth.in() );
+					QString hStr = StrUtil::formatFraction( mPageHeight.in() );
+
+					return QString("%1 x %2 %3").arg(wStr).arg(hStr).arg(units.toTrName());
+				}
+				else
+				{
+					return QString("%1 x %2 %3")
+						.arg(mPageWidth.inUnits(units), 0, 'g', 5)
+						.arg(mPageHeight.inUnits(units), 0, 'g', 5)
+						.arg(units.toTrName());
+				}
+			}
+
+			return  Db::lookupPaperNameFromId( mPaperId );
+		}
+
 
 		QString Template::paperId() const
 		{

@@ -47,9 +47,6 @@ namespace glabels
 
 
 		PageRenderer::PageRenderer( const Model* model )
-			: mModel(nullptr), mMerge(nullptr), mVariables(nullptr), mNCopies(0), mStartItem(0), mLastItem(0),
-			  mPrintOutlines(false), mPrintCropMarks(false), mPrintReverse(false),
-			  mIPage(0), mIsMerge(false), mNPages(0), mNItemsPerPage(0)
 		{
 			if ( model )
 			{
@@ -238,7 +235,7 @@ namespace glabels
 			QSizeF pageSize( mModel->tmplate()->pageWidth().pt(), mModel->tmplate()->pageHeight().pt() );
 			printer->setPageSize( QPageSize(pageSize, QPageSize::Point) );
 			printer->setFullPage( true );
-			printer->setPageMargins( 0, 0, 0, 0, QPrinter::Point );
+			printer->setPageMargins( QMarginsF(0, 0, 0, 0), QPageLayout::Point );
 
 			QPainter painter( printer );
 			

@@ -18,6 +18,7 @@
  *  along with gLabels-qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "Settings.h"
 
 #include <QLocale>
@@ -96,7 +97,7 @@ namespace glabels
 		{
 			// Guess at a suitable default
 			QString defaultFamily;
-			switch (QLocale::system().country())
+			switch (QLocale::system().territory())
 			{
 			case QLocale::UnitedStates:
 			case QLocale::Canada:
@@ -256,6 +257,28 @@ namespace glabels
 		{
 			mInstance->beginGroup( "Search" );
 			mInstance->setValue( "categoryList", searchCategoryList );
+			mInstance->endGroup();
+
+			emit mInstance->changed();
+		}
+
+
+		QListView::ViewMode Settings::templatePickerMode()
+		{
+			QString defaultMode = "icon";
+	
+			mInstance->beginGroup( "TemplatePicker" );
+			QString returnMode = mInstance->value( "viewMode", defaultMode ).toString();
+			mInstance->endGroup();
+
+			return returnMode == "icon" ? QListView::IconMode : QListView::ListMode;
+		}
+
+
+		void Settings::setTemplatePickerMode( QListView::ViewMode viewMode )
+		{
+			mInstance->beginGroup( "TemplatePicker" );
+			mInstance->setValue( "viewMode", viewMode == QListView::IconMode ? "icon" : "list" );
 			mInstance->endGroup();
 
 			emit mInstance->changed();
