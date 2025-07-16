@@ -16,8 +16,8 @@ jobs:
       - name: Find latest prerelease
         id: get_release
         uses: bruceadams/get-release@v1.3.2
-        with:
-          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up and run Snapcraft
         uses: snapcore/action-build@v1
