@@ -61,7 +61,7 @@ parts:
       - zlib1g
     override-pull: |
       snapcraftctl pull
-      # Extract version information using git
-      snapcraftctl set-version "3.99-master$(git rev-list --count master --)"
+      # Extract version information using git (assumes HEAD is tagged!)
+      snapcraftctl set-version "$(git tag --points-at HEAD)"
       # Point icon to the correct location
       sed -i.bak -e 's|Icon=glabels|Icon=/usr/share/icons/hicolor/scalable/apps/glabels.svg|g' data/glabels-qt.desktop
