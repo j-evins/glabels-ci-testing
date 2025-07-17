@@ -63,6 +63,7 @@ parts:
       snapcraftctl pull
       # Extract version information using git (assumes HEAD is tagged!)
       git pull --tags
+      git tag
       git tag --points-at HEAD
       snapcraftctl set-version "$(git tag --points-at HEAD)"
       # Point icon to the correct location
