@@ -42,7 +42,8 @@ parts:
   glabels-qt:
     after:
       - zint
-    source: https://github.com/j-evins/glabels-qt.git
+    #source: https://github.com/j-evins/glabels-qt.git
+    source: https://github.com/j-evins/glabels-ci-testing.git
     source-type: git
     source-branch: master
     plugin: cmake
@@ -64,7 +65,7 @@ parts:
       # Extract version information using git (assumes HEAD is tagged!)
       git pull --tags
       git status
-      git log -1
+      git log -1 --decorate
       git tag
       git tag --points-at HEAD
       git tag --points-at
