@@ -63,8 +63,11 @@ parts:
       snapcraftctl pull
       # Extract version information using git (assumes HEAD is tagged!)
       git pull --tags
+      git status
+      git log -1
       git tag
       git tag --points-at HEAD
+      git tag --points-at
       snapcraftctl set-version "$(git tag --points-at HEAD)"
       # Point icon to the correct location
       sed -i.bak -e 's|Icon=glabels|Icon=/usr/share/icons/hicolor/scalable/apps/glabels.svg|g' data/glabels-qt.desktop
