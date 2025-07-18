@@ -1,0 +1,71 @@
+name: Create Windows Installer
+
+on:
+  workflow_run:
+    workflows: ["Create Snapshot"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Find latest prerelease
+        id: get_release
+        uses: cardinalby/git-get-release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install optional dependencies
+        shell: bash
+        run: |
+          # install packages
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.2.*'
+          install-deps: 'true'
+          archives: 'qtbase qtsvg qttools icu'
+
+      - name: Set reusable strings
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Configure CMake
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -S ${{ github.workspace }}
+
+      - name: Build
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Test
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: ctest --build-config ${{ matrix.build_type }}
+
+      - name: CPack
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: cpack --build-config ${{ matrix.build_type }} -G NSIS64; ls
+
+#      - name: Upload Release Asset
+#        id: upload-release-asset 
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.get_release.outputs.upload_url }}
+#          asset_path: ./${{ steps.snapcraft.outputs.snap }}
+#          asset_name: ${{ steps.snapcraft.outputs.snap }}
+#          asset_content_type: application/vnd.snap

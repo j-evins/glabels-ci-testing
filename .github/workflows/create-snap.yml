@@ -1,4 +1,4 @@
-name: Create snapshot snap
+name: Create Snap
 
 on:
   workflow_run:
