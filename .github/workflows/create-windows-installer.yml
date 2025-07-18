@@ -60,9 +60,10 @@ jobs:
 
       - name: CPack
         id: cpack
+        shell: bash
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: |
-          cpack --build-config Release -G NSIS64; ls
+        run: >
+          cpack --build-config Release -G NSIS64
           echo "asset=$(ls glabels-*-win64.exe)" >> "$GITHUB_OUTPUT"
 
       - name: Upload Release Asset
