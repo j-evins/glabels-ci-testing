@@ -59,7 +59,7 @@ jobs:
         run: ctest --build-config Release
 
       - name: CPack
-        id cpack
+        id: cpack
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: |
           cpack --build-config Release -G NSIS64; ls
