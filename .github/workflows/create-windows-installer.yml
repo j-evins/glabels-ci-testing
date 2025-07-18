@@ -73,6 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./${{ steps.cpack.outputs.asset }}
+          asset_path: ${{ steps.strings.outputs.build-output-dir }}/${{ steps.cpack.outputs.asset }}
           asset_name: ${{ steps.cpack.outputs.asset }}
           asset_content_type: application/vnd.microsoft.portable-executable
