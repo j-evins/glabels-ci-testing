@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # Checkout full-depth to facilitate auto versioning
+          fetch-depth: 0
 
       - name: Find latest prerelease
         id: get_release
