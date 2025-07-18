@@ -1,4 +1,4 @@
-name: Create Snap
+name: Create Snap Package
 
 on:
   workflow_run:
