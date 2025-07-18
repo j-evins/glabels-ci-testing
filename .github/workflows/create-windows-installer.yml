@@ -49,15 +49,15 @@ jobs:
           -S ${{ github.workspace }}
 
       - name: Build
-        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config Release
 
       - name: Test
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: ctest --build-config ${{ matrix.build_type }}
+        run: ctest --build-config Release
 
       - name: CPack
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: cpack --build-config ${{ matrix.build_type }} -G NSIS64; ls
+        run: cpack --build-config Release -G NSIS64; ls
 
 #      - name: Upload Release Asset
 #        id: upload-release-asset 
